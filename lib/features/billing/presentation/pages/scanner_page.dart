@@ -1,3 +1,4 @@
+import 'package:billing_app/core/services/sound_service.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +31,10 @@ class _ScannerPageState extends State<ScannerPage> {
     for (final barcode in barcodes) {
       if (barcode.rawValue != null) {
         _isScanned = true;
+
+        // Play scan sound
+        await SoundService.instance.playScanSound();
+
         // Vibrate
         final hasVibrator = await Vibration.hasVibrator();
         if (hasVibrator == true) {
@@ -48,13 +53,19 @@ class _ScannerPageState extends State<ScannerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.chevron_left,
-                size: 28, color: Theme.of(context).primaryColor),
-            onPressed: () => context.pop(),
+        leading: IconButton(
+          icon: Icon(
+            Icons.chevron_left,
+            size: 28,
+            color: Theme.of(context).primaryColor,
           ),
-          title: const Text('Scan Barcode',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))),
+          onPressed: () => context.pop(),
+        ),
+        title: const Text(
+          'Scan Barcode',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+      ),
       body: Stack(
         children: [
           MobileScanner(
@@ -82,17 +93,11 @@ class _ScannerPageState extends State<ScannerPage> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _corner(0),
-                          _corner(1),
-                        ],
+                        children: [_corner(0), _corner(1)],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _corner(3),
-                          _corner(2),
-                        ],
+                        children: [_corner(3), _corner(2)],
                       ),
                     ],
                   ),
