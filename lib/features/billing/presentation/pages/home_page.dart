@@ -397,7 +397,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Text(
-                          '₹${state.totalAmount.toStringAsFixed(2)}',
+                          'DH${state.totalAmount.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w900,
@@ -516,7 +516,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '₹${item.product.price.toStringAsFixed(2)}',
+                  'DH${item.product.price.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
